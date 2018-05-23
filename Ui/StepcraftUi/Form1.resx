@@ -126,6 +126,12 @@
   <metadata name="backgroundWorker2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>336, 17</value>
   </metadata>
+  <data name="textBox8.Text" xml:space="preserve">
+    <value>___  _   _   _  ___  _   _   _  ___  _   _   _  ___  _   _   _  ___  _   _   _  ___  _   _   _  ___  _   _   _  ___  _   _   _  ___  _   _   _  ___  _   _   _  ___  _   _   _  ___  _   _   _  ___  _   _   _  ___  _   _   _  ___  _   _   _  </value>
+  </data>
+  <data name="textBox9.Text" xml:space="preserve">
+    <value>0                                                  13                                              26                                              39                                         52                                              65                                         78                                        91                                               104                                               117 </value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>
   </metadata>

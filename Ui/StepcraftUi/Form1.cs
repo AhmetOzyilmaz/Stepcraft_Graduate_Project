@@ -75,6 +75,7 @@ namespace StepcraftUi
             try
             {
                 connect();
+                reverseVisible();
             }
             catch (Exception ex)
             {
@@ -141,6 +142,24 @@ namespace StepcraftUi
         {
             addAndListPorts();
             panel1.BackColor = Color.White;
+
+            reverseVisible();
+
+        }
+        private void reverseVisible()
+        {
+            moveXN.Visible = !moveXN.Visible;
+            moveYN.Visible = !moveYN.Visible;
+            moveXP.Visible = !moveXP.Visible;
+            moveYP.Visible = !moveYP.Visible;
+            moveZN.Visible = !moveZN.Visible;
+            moveZP.Visible = !moveZP.Visible;
+            btn_center.Visible = !btn_center.Visible;
+            btn_draw_square.Visible = !btn_draw_square.Visible;
+            btn_home.Visible = !btn_home.Visible;
+            btn_clean.Visible = !btn_clean.Visible;
+            run_command.Visible = !run_command.Visible;
+            draw_square.Visible = !draw_square.Visible;
         }
 
         private void moveXP_Click(object sender, EventArgs e)
@@ -314,6 +333,11 @@ namespace StepcraftUi
             {
 
             }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
