@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2009
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepcraftUi", "StepcraftUi\StepcraftUi.csproj", "{2B2613AE-FD1C-4834-8E33-A321521444EA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4903013B-4545-4342-978D-CE93C746835B}"
+	ProjectSection(SolutionItems) = preProject
+		arrow.ico = arrow.ico
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B2613AE-FD1C-4834-8E33-A321521444EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B2613AE-FD1C-4834-8E33-A321521444EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B2613AE-FD1C-4834-8E33-A321521444EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B2613AE-FD1C-4834-8E33-A321521444EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7561BF2C-1F1E-4F0B-8B4B-A73898629C0F}
+	EndGlobalSection
+EndGlobal
