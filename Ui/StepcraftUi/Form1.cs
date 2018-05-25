@@ -128,6 +128,11 @@ namespace StepcraftUi
             _serialPort.WriteTimeout = 500;
             _serialPort.Open();
 
+            //set home position
+            OneStep("M306 Z0");
+            OneStep("G92 X0 Y0 Z0");
+            OneStep("g28");
+
         }
 
         private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
@@ -155,50 +160,15 @@ namespace StepcraftUi
             moveZN.Visible = !moveZN.Visible;
             moveZP.Visible = !moveZP.Visible;
             btn_center.Visible = !btn_center.Visible;
-            btn_draw_square.Visible = !btn_draw_square.Visible;
+            btn_draw.Visible = !btn_draw.Visible;
             btn_home.Visible = !btn_home.Visible;
             btn_clean.Visible = !btn_clean.Visible;
             run_command.Visible = !run_command.Visible;
             draw_square.Visible = !draw_square.Visible;
         }
-
-        private void moveXP_Click(object sender, EventArgs e)
-        {
-                OneStep("G91 X 1");
-        }
-
-        private void moveYP_Click(object sender, EventArgs e)
-        {
-                OneStep("G91 Y 1");
-        }
-
-        private void moveXN_Click(object sender, EventArgs e)
-        {
-                OneStep("G91 X-1");
-
-        }
-
-        private void moveYN_Click(object sender, EventArgs e)
-        {
-                OneStep("G91 Y -1");
-
-        }
-
         private void btn_disconnect_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private void moveZP_Click(object sender, EventArgs e)
-        {
-                OneStep("G91 z 1");
-
-        }
-
-        private void moveZN_Click(object sender, EventArgs e)
-        {
-                OneStep("G91 z -1");
-
         }
         private void draw_square_Click(object sender, EventArgs e)
         {
@@ -216,45 +186,20 @@ namespace StepcraftUi
                     OneStep("G0 Y-" + size.ToString());
 
                 }     
-            }
-            
+            }            
         }
         private void btn_home_Click(object sender, EventArgs e)
         {
-            {
-                _serialPort.WriteLine("G91 Z 70");
-                _serialPort.WriteLine("G91 Y 110");
-                _serialPort.WriteLine("G91 X -90");
-                positionIsHome = true;
-                positionIsCenter = false;
-            }
+            goHome();
         }
-
-        private void draw_Triangle_Click(object sender, EventArgs e)
+        private void goHome()
         {
-            if (positionIsHome == false && positionIsCenter == true)
-            {
-
-                OneStep("g00 z0.5 f70");
-                OneStep("g00 x - 3 y3 f70");
-                OneStep("g01 z-1 f50");
-                OneStep("g01 x - 1.1185 y4.7279 f50");
-                OneStep("gg01 x16.231 y - 4.6863");
-                OneStep("g01 x15 y - 8");
-                OneStep("g01 x-3 y - 8");
-                OneStep("g01 x-3 y3");
-                OneStep("g00 z0.5 f70");
-                OneStep(" g00 x0 y0 f70");
-                OneStep("m30");
-                }
+            _serialPort.WriteLine("G28");
         }
-
         private void run_command_Click(object sender, EventArgs e)
         {
             OneStep(enter_command.Text.ToString());
         }
-   
- 
         public void position()
         {
             _serialPort.WriteLine("?");
@@ -327,17 +272,85 @@ namespace StepcraftUi
          * * Y ekseninde 450 pixel var
          * *
          */
-        private void btn_draw_square_Click(object sender, EventArgs e)
+  
+        private void drawLine(int x1,int x2,int y1,int y2,int feedRate)
         {
-            if(lines != null)
+            int difX = (int)((x2 - x1) / 2);
+            int difY = (-1) * (int)((y2 - y1) / 2);
+            string command = "G01 X " + difX.ToString() + "  Y " + difY.ToString() + " f"+ feedRate.ToString();
+            Console.WriteLine(command);
+            OneStep(command);
+        }
+        private void btn_draw_Click(object sender, EventArgs e)
+        {
+            if (lines != null)
             {
+                // start
+                // go start point
 
+                bool isFirst = true;
+
+                Line line ;
+                for (int i = 0; i <lines.Count; i++ )
+                {
+                    line = lines[i];
+
+                    if (isFirst)
+                    {
+                        drawLine(0, line.Start.X, 0, line.Start.Y, 500);
+                        isFirst = false;
+                    }
+                    else
+                    {
+                        Line previous = lines[i - 1];
+                        drawLine(previous.End.X, line.Start.X, previous.End.Y, line.Start.Y, 500);
+                    }
+
+                    UpDownZaxis(true,-70);
+                    drawLine(line.Start.X,line.End.X, line.Start.Y, line.End.Y, 500);
+                    UpDownZaxis(false,70);
+
+                }
+                goHome();
             }
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void UpDownZaxis(Boolean state,int stepNum)
         {
+            string command = "";
 
+            command = "G91 Z " + stepNum.ToString();
+            OneStep(command);
+
+        }
+
+        private void moveXP_MouseDown(object sender, MouseEventArgs e)
+        {
+            OneStep("G91 X 1");
+        }
+
+        private void moveYP_MouseDown(object sender, MouseEventArgs e)
+        {
+            OneStep("G91 Y 1");
+        }
+
+        private void moveZP_MouseDown(object sender, MouseEventArgs e)
+        {
+            OneStep("G91 z 1");
+        }
+
+        private void moveXN_MouseDown(object sender, MouseEventArgs e)
+        {
+            OneStep("G91 X-1");
+        }
+
+        private void moveYN_MouseDown(object sender, MouseEventArgs e)
+        {
+            OneStep("G91 Y -1");
+        }
+
+        private void moveZN_MouseDown(object sender, MouseEventArgs e)
+        {
+            OneStep("G91 z -1");
         }
     }
 }
