@@ -15,6 +15,7 @@ namespace StepcraftUi
         Boolean positionIsCenter = false;
         List<Line> lines = new List<Line>();
         Line line = null;
+        private static int ZaxisStep = 56;
         
         public UserInterface()
         {
@@ -229,7 +230,7 @@ namespace StepcraftUi
         {
             _serialPort.WriteLine("G91 X 90");
             _serialPort.WriteLine("G91 Y -110");
-            _serialPort.WriteLine("G91 Z -70");
+            _serialPort.WriteLine("G91 Z -"+ZaxisStep+"");
         }
 
         private void draw_Butterfly_Click(object sender, EventArgs e)
@@ -292,18 +293,18 @@ namespace StepcraftUi
 
                     if (isFirst)
                     {
-                        drawLine(0, line.Start.X, 0, line.Start.Y, 500);
+                        drawLine(0, line.Start.X, 0, line.Start.Y, 1000);
                         isFirst = false;
                     }
                     else
                     {
                         Line previous = lines[i - 1];
-                        drawLine(previous.End.X, line.Start.X, previous.End.Y, line.Start.Y, 500);
+                        drawLine(previous.End.X, line.Start.X, previous.End.Y, line.Start.Y, 1000);
                     }
 
-                    UpDownZaxis(true,-70);
-                    drawLine(line.Start.X,line.End.X, line.Start.Y, line.End.Y, 500);
-                    UpDownZaxis(false,70);
+                    UpDownZaxis(true,-ZaxisStep);
+                    drawLine(line.Start.X,line.End.X, line.Start.Y, line.End.Y, 1000);
+                    UpDownZaxis(false,ZaxisStep);
 
                 }
                 goHome();
