@@ -71,6 +71,8 @@
     <None Include="butterflies\butterfly.nc" />
     <None Include="butterflies\butterfly1.dxf" />
     <None Include="butterflies\butterfly1.nc" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="gingerbread_boys\gbm1.dxf" />
     <None Include="gingerbread_boys\gbm1.nc" />
     <None Include="gingerbread_boys\gbm2.dxf" />

@@ -11,5 +11,11 @@ namespace StepcraftUi
     {
         public Point Start { get; set; }
         public Point End { get; set; }
+
+        public void Print()
+        {
+            Console.WriteLine("Start : " + Start);
+            Console.WriteLine("End : " + End);
+        }
     }
 }

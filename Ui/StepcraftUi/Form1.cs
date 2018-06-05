@@ -39,20 +39,16 @@ namespace StepcraftUi
             if (line != null)
             {
                 e.Graphics.DrawLine(Pens.Red, line.Start, line.End);
-                PrintLine(line);
+                line.Print();
             }
 
             foreach (var l in lines)
             {
                 e.Graphics.DrawLine(Pens.Silver, l.Start, l.End);
-                PrintLine(line);
+                line.Print();
             }
         }
-        private void PrintLine(Line line)
-        {
-            Console.WriteLine("Start : " + line.Start);
-            Console.WriteLine("End : " + line.End);
-        }
+       
 
         private void Clean()
         {
@@ -147,7 +143,6 @@ namespace StepcraftUi
         {
             addAndListPorts();
             panel1.BackColor = Color.White;
-
             reverseVisible();
 
         }
@@ -168,7 +163,7 @@ namespace StepcraftUi
         }
         private void btn_disconnect_Click(object sender, EventArgs e)
         {
-            Close();
+            connectionClose();
         }
         private void draw_square_Click(object sender, EventArgs e)
         {
@@ -211,7 +206,7 @@ namespace StepcraftUi
             _serialPort.WriteLine(message);
             position();
         }
-        public void Close()
+        public void connectionClose()
         {
             _serialPort.Close();
         }
@@ -220,12 +215,12 @@ namespace StepcraftUi
         {
             if (fullscreen)
             {
-                this.WindowState = FormWindowState.Maximized;
-                this.Bounds = Screen.PrimaryScreen.Bounds;
+                WindowState = FormWindowState.Maximized;
+                Bounds = Screen.PrimaryScreen.Bounds;
             }
             else
             {
-                this.WindowState = FormWindowState.Maximized;
+                WindowState = FormWindowState.Maximized;
                 FormBorderStyle = FormBorderStyle.Sizable;
             }
         }
@@ -275,8 +270,8 @@ namespace StepcraftUi
   
         private void drawLine(int x1,int x2,int y1,int y2,int feedRate)
         {
-            int difX = (int)((x2 - x1) / 2);
-            int difY = (-1) * (int)((y2 - y1) / 2);
+            int difX = ((x2 - x1) / 2);
+            int difY = (-1) * ((y2 - y1) / 2);
             string command = "G01 X " + difX.ToString() + "  Y " + difY.ToString() + " f"+ feedRate.ToString();
             Console.WriteLine(command);
             OneStep(command);
@@ -317,10 +312,8 @@ namespace StepcraftUi
         private void UpDownZaxis(Boolean state,int stepNum)
         {
             string command = "";
-
             command = "G91 Z " + stepNum.ToString();
             OneStep(command);
-
         }
 
         private void moveXP_MouseDown(object sender, MouseEventArgs e)
